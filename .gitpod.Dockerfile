@@ -1,6 +1,8 @@
 FROM gitpod/workspace-full
 
 USER gitpod
+# Fix issues E: Unable to locate package libjpeg62-turbo-dev | https://askubuntu.com/a/660489
+RUN sudo sed -i.bak 's/us-west-2\.ec2\.//' /etc/apt/sources.list
 # Installing Required Packages
 RUN sudo apt update && sudo apt upgrade -y && \
     sudo apt install --no-install-recommends -y \
@@ -15,6 +17,7 @@ RUN sudo apt update && sudo apt upgrade -y && \
     libjpeg62-turbo-dev \
     libwebp-dev \
     linux-headers-amd64 \
+    linux-headers-generic \
     python3-lxml \
     python3-pip \
     python3-requests \
